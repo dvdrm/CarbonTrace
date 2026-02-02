@@ -80,11 +80,11 @@ export default function App() {
       <footer
         style={{
           position: 'fixed',
-          bottom: '56px', // 关键：避开 bottom-nav
+          bottom: '72px', // 关键：避开 bottom-nav
           width: '100%',
           textAlign: 'center',
           fontSize: '12px',
-          color: '#999',
+          color: 'rgba(0,0,0,0.55)',
           zIndex: 10,
           pointerEvents: 'auto'
         }}
