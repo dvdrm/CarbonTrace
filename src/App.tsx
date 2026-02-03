@@ -80,25 +80,26 @@ export default function App() {
       <footer
         style={{
           position: 'fixed',
-          bottom: 'var(--bottom-nav-height)',
+         bottom: 'var(--bottom-nav-height)',
           width: '100%',
           textAlign: 'center',
           fontSize: '12px',
-          color: 'rgba(0,0,0,0.55)',
+         color: 'rgba(0,0,0,0.55)',
           zIndex: 10,
           pointerEvents: 'auto'
         }}
       >
-        <a
-          href="https://beian.miit.gov.cn/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'inherit', textDecoration: 'none' }}
-        >
-          
-蜀ICP备2026005250号-1
-        </a>
-      </footer>
+        {/* 工信部备案 */}
+        <div>
+          <a
+            href="https://beian.miit.gov.cn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            备案号：蜀ICP备2026005250号-1
+          </a>
+        </div>
       
       <AnimatePresence>
         {showAddModal && <AddActivityModal onClose={() => setShowAddModal(false)} />}
