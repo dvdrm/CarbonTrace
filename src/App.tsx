@@ -95,7 +95,7 @@ export default function App() {
           rel="noopener noreferrer"
           style={{ color: 'inherit', textDecoration: 'none' }}
         >
-          备案号：湘ICP备2026003711号-1
+          蜀ICP备2026005250号
         </a>
       </footer>
       
