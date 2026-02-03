@@ -101,28 +101,7 @@ export default function App() {
           </a>
         </div>
 
-        {/* 公安备案 */}
-        <div style={{ marginTop: 4 }}>
-          <a
-           href="https://beian.mps.gov.cn/#/query/webSearch"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: 'inherit',
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4
-            }}
-          >
-            <img
-              src="https://www.beian.gov.cn/img/new/gongan.png"
-              alt="公安备案"
-              style={{ width: 14, height: 14 }}
-            />
-            备案中
-          </a>
-        </div>
+
       </footer>
       
       <AnimatePresence>
