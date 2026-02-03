@@ -95,7 +95,8 @@ export default function App() {
           rel="noopener noreferrer"
           style={{ color: 'inherit', textDecoration: 'none' }}
         >
-          蜀ICP备2026005250号
+          
+蜀ICP备2026005250号-1
         </a>
       </footer>
       
