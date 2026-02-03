@@ -75,7 +75,7 @@ export default function App() {
           <span className="text-xs">设置</span>
         </button>
       </nav>
-
+      
       {/* 备案信息：固定在底部导航上方 */}
       <footer
         style={{
@@ -100,6 +100,30 @@ export default function App() {
             备案号：蜀ICP备2026005250号-1
           </a>
         </div>
+
+        {/* 公安备案 */}
+        <div style={{ marginTop: 4 }}>
+          <a
+           href="https://beian.mps.gov.cn/#/query/webSearch"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'inherit',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4
+            }}
+          >
+            <img
+              src="https://www.beian.gov.cn/img/new/gongan.png"
+              alt="公安备案"
+              style={{ width: 14, height: 14 }}
+            />
+            备案中
+          </a>
+        </div>
+      </footer>
       
       <AnimatePresence>
         {showAddModal && <AddActivityModal onClose={() => setShowAddModal(false)} />}
