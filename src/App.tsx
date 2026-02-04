@@ -20,7 +20,12 @@ export default function App() {
   const todayCarbon = getTodayCarbon()
 
   return (
-    <div className="min-h-screen pb-20">
+    /**
+     * 关键点：
+     * 1️⃣ pb-[128px] 给「备案 + tab」留足真实空间
+     * 2️⃣ 备案不 fixed，tab 才 fixed
+     */
+    <div className="min-h-screen pb-[128px]">
       <Header />
 
       <main className="container mx-auto px-4 py-6 max-w-lg">
@@ -35,58 +40,15 @@ export default function App() {
         {activeTab === 'stats' && <StatsPanel />}
       </main>
 
-      {/* 底部导航 */}
-      <nav className="bottom-nav">
-        <button
-          onClick={() => setActiveTab('home')}
-          className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
-        >
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-          </svg>
-          <span className="text-xs">首页</span>
-        </button>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="nav-item"
-        >
-          <div className="w-12 h-12 -mt-6 bg-gradient-leaf rounded-full flex items-center justify-center shadow-lg">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-          </div>
-        </button>
-        <button
-          onClick={() => setActiveTab('stats')}
-          className={`nav-item ${activeTab === 'stats' ? 'active' : ''}`}
-        >
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/>
-          </svg>
-          <span className="text-xs">统计</span>
-        </button>
-        <button
-          onClick={() => setShowSettings(true)}
-          className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`}
-        >
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
-          </svg>
-          <span className="text-xs">设置</span>
-        </button>
-      </nav>
-      
-      {/* 备案信息：固定在底部导航上方 */}
-      <footer
+      {/* ===== 备案信息（正常文档流，永不重叠） ===== */}
+      <div
         style={{
-          position: 'fixed',
-         bottom: 'var(--bottom-nav-height)',
-          width: '100%',
+          marginTop: 8,
+          marginBottom: 12,
           textAlign: 'center',
           fontSize: '12px',
-         color: 'rgba(0,0,0,0.55)',
-          zIndex: 10,
-          pointerEvents: 'auto'
+          color: 'rgba(0,0,0,0.6)',
+          lineHeight: 1.6
         }}
       >
         {/* 工信部备案 */}
@@ -100,18 +62,19 @@ export default function App() {
             备案号：蜀ICP备2026005250号-1
           </a>
         </div>
+
         {/* 公安备案 */}
-        <div style={{ marginTop: 4 }}>
+        <div>
           <a
-           href="https://beian.mps.gov.cn/#/query/webSearch"
+            href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51152902000045"
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              color: 'inherit',
-              textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 4
+              gap: 4,
+              color: 'inherit',
+              textDecoration: 'none'
             }}
           >
             <img
@@ -122,9 +85,54 @@ export default function App() {
             川公网安备51152902000045号
           </a>
         </div>
+      </div>
 
-      </footer>
-      
+      {/* ===== 底部导航（唯一 fixed 元素） ===== */}
+      <nav className="bottom-nav">
+        <button
+          onClick={() => setActiveTab('home')}
+          className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
+        >
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+          <span className="text-xs">首页</span>
+        </button>
+
+        <button onClick={() => setShowAddModal(true)} className="nav-item">
+          <div className="w-12 h-12 -mt-6 bg-gradient-leaf rounded-full flex items-center justify-center shadow-lg">
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('stats')}
+          className={`nav-item ${activeTab === 'stats' ? 'active' : ''}`}
+        >
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z" />
+          </svg>
+          <span className="text-xs">统计</span>
+        </button>
+
+        <button
+          onClick={() => setShowSettings(true)}
+          className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`}
+        >
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24,1.13-.56,1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+          </svg>
+          <span className="text-xs">设置</span>
+        </button>
+      </nav>
+
       <AnimatePresence>
         {showAddModal && <AddActivityModal onClose={() => setShowAddModal(false)} />}
         {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
